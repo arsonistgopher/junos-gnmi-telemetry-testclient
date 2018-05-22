@@ -5,11 +5,10 @@ import (
 	"fmt"
 	"log"
 	"os"
-	"strings"
 
 	"github.com/Sirupsen/logrus"
-	auth_pb "github.com/arsonistgopher/gojtemtestgnmi/authentication"
-	gnmipb "github.com/arsonistgopher/gojtemtestgnmi/proto/gnmi"
+	auth_pb "github.com/arsonistgopher/junos-gnmi-telem-testclient/authentication"
+	gnmipb "github.com/arsonistgopher/junos-gnmi-telem-testclient/proto/gnmi"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
 )
@@ -80,37 +79,6 @@ func subSendAndReceiveGNMI(conn *grpc.ClientConn, req *gnmipb.SubscribeRequest) 
 		}
 		processGNMIResponse(resp)
 	}
-}
-
-func xpathToGNMIpath(input string) ([]string, error) {
-	path := strings.Trim(input, "/")
-	var buf []rune
-	inKey := false
-	null := rune(0)
-	for _, r := range path {
-		switch r {
-		case '[':
-			if inKey {
-				return nil, fmt.Errorf("malformed path, nested '[': %q ", path)
-			}
-			inKey = true
-		case ']':
-			if !inKey {
-				return nil, fmt.Errorf("malformed path, unmatched ']': %q", path)
-			}
-			inKey = false
-		case '/':
-			if !inKey {
-				buf = append(buf, null)
-				continue
-			}
-		}
-		buf = append(buf, r)
-	}
-	if inKey {
-		return nil, fmt.Errorf("malformed path, missing trailing ']': %q", path)
-	}
-	return strings.Split(string(buf), string(null)), nil
 }
 
 func main() {
