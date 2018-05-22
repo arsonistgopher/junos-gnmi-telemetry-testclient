@@ -45,7 +45,7 @@ Usage of ./junos-gnmi-telem-testclient:
 Here is how to run it in case this still doesn't make sense.
 
 ```bash
-./junos-gnmi-telem-testclient -certdir CLIENTCERT -cid 1 -host vmx02.corepipe.co.uk -port 50051 -subscription /interfaces/ -user jet
+./junos-gnmi-telem-testclient -certdir CLIENTCERT -cid 1 -host vmx -port 50051 -subscription /interfaces/ -user jet
 ```
 Replace `HOST` with the hostname or IP address of your code. Replace `50051` with the port your gRPC server on Junos is listening on. For the resource you want telemetry on, replace `/interfaces` with your chosen OpenConfig sensor.
 
