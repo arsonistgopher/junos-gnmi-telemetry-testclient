@@ -18,7 +18,15 @@ go build
 ./junos-gnmi-telem-testclient
 ```
 
-The script requires some command line inputs as below.
+If you do not want to build, that's fine. I've got you covered. There are three binaries pre-compiled and ready to go.
+
+```bash
+junos-gnmi-telem-testclient-junos-32-0.1
+junos-gnmi-telem-testclient-linux-64-0.1
+junos-gnmi-telem-testclient-osx-0.1
+```
+
+To run the application, some command line inputs are required as below.
 
 ```bash
 ./junos-gnmi-telem-testclient -h
