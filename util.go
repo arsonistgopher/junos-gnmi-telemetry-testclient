@@ -9,7 +9,7 @@ import (
 	"sort"
 	"strings"
 
-	gnmipb "github.com/arsonistgopher/junos-gnmi-telem-testclient/proto/gnmi"
+	gnmipb "github.com/arsonistgopher/junos-gnmi-telemetry-testclient/proto/gnmi"
 )
 
 func getSMode(mode string) gnmipb.SubscriptionMode {

@@ -11,8 +11,8 @@ import (
 	"os"
 	"syscall"
 
-	auth_pb "github.com/arsonistgopher/junos-gnmi-telem-testclient/authentication"
-	gnmipb "github.com/arsonistgopher/junos-gnmi-telem-testclient/proto/gnmi"
+	auth_pb "github.com/arsonistgopher/junos-gnmi-telemetry-testclient/authentication"
+	gnmipb "github.com/arsonistgopher/junos-gnmi-telemetry-testclient/proto/gnmi"
 	"golang.org/x/crypto/ssh/terminal"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"

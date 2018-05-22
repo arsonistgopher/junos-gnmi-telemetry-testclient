@@ -11,31 +11,31 @@ Do not use this for anything other than curiosity!
 This package has been created with Godep support for dependencies.
 
 ```bash
-go get github.com/arsonistgopher/junos-gnmi-telem-testclient.git
-cd $GOHOME/src/github.com/arsonistgopher/junos-gnmi-telem-testclient
+go get github.com/arsonistgopher/junos-gnmi-telemetry-testclient.git
+cd $GOHOME/src/github.com/arsonistgopher/junos-gnmi-telemetry-testclient
 godep restore
 go build
-./junos-gnmi-telem-testclient
+./junos-gnmi-telemetry-testclient
 ```
 
 If you do not want to build, that's fine. I've got you covered. There are three binaries pre-compiled and ready to go.
 
 ```bash
-junos-gnmi-telem-testclient-junos-32-0.1
-junos-gnmi-telem-testclient-linux-64-0.1
-junos-gnmi-telem-testclient-osx-0.1
+junos-gnmi-telemetry-testclient-junos-32-0.1
+junos-gnmi-telemetry-testclient-linux-64-0.1
+junos-gnmi-telemetry-testclient-osx-0.1
 ```
 
 To run the application, some command line inputs are required as below.
 
 ```bash
-./junos-gnmi-telem-testclient -h
+./junos-gnmi-telemetry-testclient -h
 2018/05/22 17:32:45 -----------------------------------
 2018/05/22 17:32:45 Junos gNMI Telemetry Test Tool
 2018/05/22 17:32:45 -----------------------------------
 2018/05/22 17:32:45 Run the app with -h for options
 
-Usage of ./junos-gnmi-telem-testclient:
+Usage of ./junos-gnmi-telemetry-testclient:
   -certdir string
     	Directory with clientCert.crt, clientKey.crt, CA.crt
   -cid string
@@ -53,7 +53,7 @@ Usage of ./junos-gnmi-telem-testclient:
 Here is how to run it in case this still doesn't make sense.
 
 ```bash
-./junos-gnmi-telem-testclient -certdir CLIENTCERT -cid 1 -host vmx -port 50051 -subscription /interfaces/ -user jet
+./junos-gnmi-telemetry-testclient -certdir CLIENTCERT -cid 1 -host vmx -port 50051 -subscription /interfaces/ -user jet
 ```
 Replace `HOST` with the hostname or IP address of your code. Replace `50051` with the port your gRPC server on Junos is listening on. For the resource you want telemetry on, replace `/interfaces` with your chosen OpenConfig sensor.
 
@@ -77,7 +77,7 @@ Finally, here is a list of paths you can use for subscriptions to gNMI!
 Finally finally, here is some test output! Use `Ctrl+c` to quit.
 
 ```bash
-./junos-gnmi-telem-testclient -certdir CLIENTCERT -cid 1 -host vmx -port 50051 -subscription /interfaces/ -user jet
+./junos-gnmi-telemetry-testclient -certdir CLIENTCERT -cid 1 -host vmx -port 50051 -subscription /interfaces/ -user jet
 
 2018/05/22 17:40:02 -----------------------------------
 2018/05/22 17:40:02 Junos gNMI Telemetry Test Tool
