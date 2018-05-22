@@ -1,4 +1,4 @@
-## Basic Junos OpenConfig telemetry tester
+## Basic Junos GNMI Telemetry Test Client
 
 This is a Go script that demonstrates how to retrieve gNMI data from Junos via gRPC.
 
