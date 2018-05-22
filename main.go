@@ -50,7 +50,7 @@ func processGNMIResponse(resp *gnmipb.SubscribeResponse) {
 	}
 }
 
-func subSendAndReceiveGNMI(conn *grpc.ClientConn, req *gnmipb.SubscribeRequest) {
+func subSendAndReceiveGNMI(conn *grpc.ClientConn, req *gnmipb.SubscribeRequest, loops *int) {
 	c := gnmipb.NewGNMIClient(conn)
 
 	ctx := context.Background()
@@ -63,7 +63,7 @@ func subSendAndReceiveGNMI(conn *grpc.ClientConn, req *gnmipb.SubscribeRequest) 
 		log.Fatalf("Error sending(): %q", err)
 	}
 
-	for {
+	for i := 0; i < *loops; i++ {
 		var resp *gnmipb.SubscribeResponse
 		resp, err := client.Recv()
 		if err != nil {
@@ -83,6 +83,7 @@ func main() {
 	// Parse flags
 	var host = flag.String("host", "127.0.0.1", "Set host to IP address or FQDN DNS record")
 	var subscription = flag.String("subscription", "/interfaces/", "Set subscription to path")
+	var loops = flag.Int("loops", 2, "Set number of times we should go through receive and print loop")
 	var user = flag.String("user", "testuser", "Set to username")
 	var port = flag.String("port", "32767", "Set to Server Port")
 	var cid = flag.String("cid", "1", "Set to Client ID")
@@ -185,6 +186,7 @@ func main() {
 	fmt.Printf("gnmiPath: (%T) %q\n", gpath, gpath)
 	fmt.Printf("pathToString: %q\n", pathToString(gpath))
 	pp, err := StringToPath(pathToString(gpath), StructuredPath, StringSlicePath)
+
 	if err != nil {
 		log.Fatalf("Invalid path: %v", err)
 	}
@@ -198,11 +200,7 @@ func main() {
 
 	req := &gnmipb.SubscribeRequest{Request: s}
 	fmt.Printf("\n\n%q\n\n", req)
-	subSendAndReceiveGNMI(conn, req)
-
-	if err != nil {
-		log.Fatalf("%v", err.Error())
-	}
+	subSendAndReceiveGNMI(conn, req, loops)
 
 	fmt.Println("Exit")
 }

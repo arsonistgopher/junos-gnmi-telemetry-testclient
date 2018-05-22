@@ -29,19 +29,21 @@ junos-gnmi-telemetry-testclient-osx-0.1
 To run the application, some command line inputs are required as below.
 
 ```bash
-./junos-gnmi-telemetry-testclient -h
-2018/05/22 17:32:45 -----------------------------------
-2018/05/22 17:32:45 Junos gNMI Telemetry Test Tool
-2018/05/22 17:32:45 -----------------------------------
-2018/05/22 17:32:45 Run the app with -h for options
+./junos-gnmi-telemetry-testclient-osx-0.1 -h
+2018/05/22 18:10:19 -----------------------------------
+2018/05/22 18:10:19 Junos gNMI Telemetry Test Tool
+2018/05/22 18:10:19 -----------------------------------
+2018/05/22 18:10:19 Run the app with -h for options
 
-Usage of ./junos-gnmi-telemetry-testclient:
+Usage of ./junos-gnmi-telemetry-testclient-osx-0.1:
   -certdir string
-    	Directory with clientCert.crt, clientKey.crt, CA.crt
+    	Directory with client.crt, client.key, CA.crt
   -cid string
     	Set to Client ID (default "1")
   -host string
     	Set host to IP address or FQDN DNS record (default "127.0.0.1")
+  -loops int
+    	Set number of times we should go through receive and print loop (default 2)
   -port string
     	Set to Server Port (default "32767")
   -subscription string
@@ -77,12 +79,11 @@ Finally, here is a list of paths you can use for subscriptions to gNMI!
 Finally finally, here is some test output! Use `Ctrl+c` to quit.
 
 ```bash
-./junos-gnmi-telemetry-testclient -certdir CLIENTCERT -cid 1 -host vmx -port 50051 -subscription /interfaces/ -user jet
-
-2018/05/22 17:40:02 -----------------------------------
-2018/05/22 17:40:02 Junos gNMI Telemetry Test Tool
-2018/05/22 17:40:02 -----------------------------------
-2018/05/22 17:40:02 Run the app with -h for options
+./junos-gnmi-telemetry-testclient-osx-0.1 -loops 1 -host vmx -port 50051 -subscription /interfaces/ -user jet -certdir CLIENTCERT
+2018/05/22 18:10:47 -----------------------------------
+2018/05/22 18:10:47 Junos gNMI Telemetry Test Tool
+2018/05/22 18:10:47 -----------------------------------
+2018/05/22 18:10:47 Run the app with -h for options
 
 Enter Password:
 gnmiPath: ([]string) ["interfaces"]
@@ -95,7 +96,7 @@ gNMIPath: (*gnmi.Path) "element:\"interfaces\" elem:<name:\"interfaces\" > "
 Path:  [name:"__juniper_telemetry_header__" ]
 Value:  any_val:<type_url:"type.googleapis.com/GnmiJuniperTelemetryHeader" value:"\n\005vmx02\020\377\377\003\"/sensor_1000_4_1:/interfaces/:/interfaces/:mib2d(\200\200\200\001" >
 Path:  [name:"__timestamp__" ]
-Value:  uint_val:1527014406155
+Value:  uint_val:1527016251752
 Path:  [name:"state"  name:"type" ]
 Value:  string_val:"other"
 Path:  [name:"state"  name:"mtu" ]
@@ -103,5 +104,16 @@ Value:  uint_val:65535
 Path:  [name:"state"  name:"name" ]
 Value:  string_val:"lsi"
 Path:  [name:"state"  name:"description" ]
-<snip>
+Value:  string_val:""
+Path:  [name:"state"  name:"enabled" ]
+Value:  bool_val:true
+Path:  [name:"state"  name:"ifindex" ]
+Value:  uint_val:4
+Path:  [name:"state"  name:"admin-status" ]
+Value:  string_val:"UP"
+Path:  [name:"state"  name:"oper-status" ]
+Value:  string_val:"UP"
+Path:  [name:"state"  name:"last-change" ]
+Value:  uint_val:203
+Exit
 ```
