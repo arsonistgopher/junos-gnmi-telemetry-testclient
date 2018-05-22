@@ -18,19 +18,6 @@ import (
 	"google.golang.org/grpc/credentials"
 )
 
-// SUBSCRIPTIONPATH is for easy scripting
-// "/interfaces"
-// "/junos/system/linecard/packet/usage"
-// "/bgp"
-// "/components"
-// "/interfaces/interface/subinterfaces"
-// "/junos/npu-memory"
-// "/junos/system/linecard/npu/memory"
-// "/junos/task-memory-information"
-// "/junos/system/linecard/firewall/"
-// "/interfaces/interface[name='fxp0']/"
-// const SUBSCRIPTIONPATH = "/interfaces/"
-
 func processGNMIResponse(resp *gnmipb.SubscribeResponse) {
 	if notif := resp.GetUpdate(); notif != nil {
 		// Have the full update
@@ -97,9 +84,9 @@ func main() {
 	var host = flag.String("host", "127.0.0.1", "Set host to IP address or FQDN DNS record")
 	var subscription = flag.String("subscription", "/interfaces/", "Set subscription to path")
 	var user = flag.String("user", "testuser", "Set to username")
-	var port = flag.String("port", "50051", "Set to Server Port")
+	var port = flag.String("port", "32767", "Set to Server Port")
 	var cid = flag.String("cid", "1", "Set to Client ID")
-	var certDir = flag.String("certdir", "", "Directory with clientCert.crt, clientKey.crt, CA.crt")
+	var certDir = flag.String("certdir", "", "Directory with client.crt, client.key, CA.crt")
 	flag.Parse()
 
 	// Set host
